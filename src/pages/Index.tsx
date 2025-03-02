@@ -206,7 +206,9 @@ const Index = () => {
                 Join thousands of users who are transforming their financial future with Fingenius.
               </p>
               <Button size="lg" className="bg-white text-primary hover:bg-white/90">
-                Get Started Today
+              <Link href="/login">
+                  Get Started Today
+                </Link>
               </Button>
             </div>
           </div>
