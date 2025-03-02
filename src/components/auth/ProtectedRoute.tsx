@@ -1,43 +1,42 @@
+"use client";
 
-'use client';
-
-import { useEffect } from 'react';
-import { useRouter, usePathname } from 'next/navigation';
-import { toast } from 'sonner';
+import { useEffect, useState } from "react";
+import { useRouter, usePathname } from "next/navigation";
+import { toast } from "sonner";
+import Cookies from "js-cookie";
 
 const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
   const router = useRouter();
   const pathname = usePathname();
-  
-  // Check if user is authenticated
-  const isAuthenticated = () => {
-    if (typeof window === 'undefined') return false;
-    
-    const userData = localStorage.getItem('user');
-    if (!userData) return false;
-    
-    try {
-      const user = JSON.parse(userData);
-      return user && user.isAuthenticated;
-    } catch (error) {
-      return false;
-    }
-  };
-  
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [loading, setLoading] = useState(true);
+
   useEffect(() => {
-    if (!isAuthenticated()) {
-      toast.error('Please log in to continue');
-      router.push(`/login?from=${encodeURIComponent(pathname)}`);
+    // Check if user is authenticated from cookies
+    const userData = Cookies.get("user");
+    if (userData) {
+      try {
+        const user = JSON.parse(userData);
+        if (user?.isAuthenticated) {
+          setIsAuthenticated(true);
+        }
+      } catch (error) {
+        console.error("Error parsing user data:", error);
+      }
     }
-  }, [pathname, router]);
+    setLoading(false);
+  }, [pathname]);
 
-  if (!isAuthenticated()) {
-    // Rendering nothing until redirect happens
-    return null;
-  }
+  useEffect(() => {
+    if (!loading && !isAuthenticated) {
+      toast.error("Please log in to continue");
+      router.push("/login");
+    }
+  }, [loading, isAuthenticated, router]);
 
-  // If authenticated, render the child routes
-  return <>{children}</>;
+  if (loading) return null; // Avoid flashing content
+
+  return isAuthenticated ? <>{children}</> : null;
 };
 
 export default ProtectedRoute;

@@ -1,34 +1,35 @@
-import React from 'react';
-import Link from 'next/link';
+import React from "react";
+import Link from "next/link";
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
 
   const footerLinks = [
     {
-      title: 'Services',
+      title: "Services",
       links: [
-        { name: 'Courses', path: '/courses' },
-        { name: 'Podcast', path: '/podcast' },
-        { name: 'AI Chatbot', path: '/chatbot' },
-        { name: 'Games', path: '/games' },
+        { name: "Courses", path: "/courses" },
+        { name: "Podcast", path: "/podcast" },
+        { name: "AI Chatbot", path: "/chatbot" },
+        { name: "Games", path: "/games" },
       ],
     },
     {
-      title: 'Company',
+      title: "Company",
       links: [
-        { name: 'About Us', path: '/about' },
-        { name: 'Careers', path: '/careers' },
-        { name: 'Contact', path: '/contact' },
-        { name: 'Blog', path: '/blog' },
+        { name: "About Us", path: "/about" },
+        { name: "Careers", path: "/careers" },
+        { name: "Contact", path: "/contact" },
+        { name: "Blog", path: "/blog" },
       ],
     },
     {
-      title: 'Legal',
+      title: "Team",
       links: [
-        { name: 'Terms of Service', path: '/terms' },
-        { name: 'Privacy Policy', path: '/privacy' },
-        { name: 'Cookie Policy', path: '/cookies' },
+        { name: "Rahul Reddy", path: "/terms" },
+        { name: "Sandeep Kalyan", path: "/privacy" },
+        { name: "Yaswanth Varada", path: "/cookies" },
+        { name: "Gnana Sagar", path: "/cookies" },
       ],
     },
   ];
@@ -45,7 +46,8 @@ const Footer = () => {
               </span>
             </Link>
             <p className="text-muted-foreground mb-4 max-w-md">
-              Empowering you with financial knowledge and tools to make smarter investment decisions and enhance your financial literacy.
+              Empowering you with financial knowledge and tools to make smarter
+              investment decisions and enhance your financial literacy.
             </p>
             <p className="text-sm text-muted-foreground">
               © {currentYear} Fingenius. All rights reserved.
