@@ -1,0 +1,54 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id                     String  @id @default(uuid())
+  fullName               String
+  email                  String  @unique
+  passwordHash           String
+  isAuthenticated        Boolean @default(false)
+  isRegistrationComplete Boolean @default(false)
+  profile                UserProfile?
+}
+
+model UserProfile {
+  id                 String  @id @default(uuid())
+  user               User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId             String  @unique
+  age                String?
+  gender             String?
+  income             String?
+  bankBalance        String?
+  propertiesWorth    String?
+  debt               String?
+  insurance          String?
+  medicalCondition   String?
+  lifestyle          String?
+  overallDescription String?
+}
+
+model Course {
+  id          String         @id @default(uuid())
+  title       String
+  description String
+  thumbnailUrl String
+  duration    String
+  level       String
+  modules     CourseModule[]
+}
+
+model CourseModule {
+  id          String   @id @default(uuid())
+  course      Course   @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  courseId    String
+  title       String
+  description String
+  videoUrl    String
+  order       Int
+}
