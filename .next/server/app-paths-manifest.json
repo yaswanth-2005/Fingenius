@@ -1,17 +1,7 @@
 {
-  "/api/profile/route": "app/api/profile/route.js",
-  "/api/auth/route": "app/api/auth/route.js",
-  "/api/register/route": "app/api/register/route.js",
-  "/api/registration-details/route": "app/api/registration-details/route.js",
-  "/_not-found/page": "app/_not-found/page.js",
-  "/billing-portal/page": "app/billing-portal/page.js",
-  "/chatbot/page": "app/chatbot/page.js",
-  "/courses/page": "app/courses/page.js",
-  "/course/[courseId]/page": "app/course/[courseId]/page.js",
-  "/games/page": "app/games/page.js",
-  "/login/page": "app/login/page.js",
   "/page": "app/page.js",
-  "/podcast/page": "app/podcast/page.js",
-  "/registration-details/page": "app/registration-details/page.js",
-  "/signup/page": "app/signup/page.js"
+  "/login/page": "app/login/page.js",
+  "/courses/page": "app/courses/page.js",
+  "/chatbot/page": "app/chatbot/page.js",
+  "/games/page": "app/games/page.js"
 }

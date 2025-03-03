@@ -1,21 +1,6 @@
 {
   "/_app": "pages/_app.js",
   "/_error": "pages/_error.js",
-  "/ChatBot": "pages/ChatBot.html",
-  "/CourseDetail": "pages/CourseDetail.html",
-  "/Courses": "pages/Courses.html",
-  "/Login": "pages/Login.html",
-  "/Index": "pages/Index.html",
-  "/Games": "pages/Games.html",
-  "/NotFound": "pages/NotFound.html",
-  "/Podcast": "pages/Podcast.html",
-  "/RegistrationDetails": "pages/RegistrationDetails.html",
-  "/SignUp": "pages/SignUp.html",
-  "/api/login": "pages/api/login.js",
-  "/api/games": "pages/api/games.js",
-  "/api/registration": "pages/api/registration.js",
-  "/api/signup": "pages/api/signup.js",
-  "/billingportal": "pages/billingportal.html",
   "/_document": "pages/_document.js",
-  "/404": "pages/404.html"
+  "/api/games": "pages/api/games.js"
 }
