@@ -1,7 +1,9 @@
-'use client';
+"use client";
 
-import BillingPortal from '@/pages/billingportal'; 
+import AdvancedBillingPortal from "../../pages/billingportal";
+
+// import BillingPortal from '@/pages/BillingPortal';
 
 export default function Dashboard() {
-  return <BillingPortal />;
+  return <AdvancedBillingPortal />;
 }

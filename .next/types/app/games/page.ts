@@ -1,4 +1,4 @@
-// File: C:\Users\ICON\Desktop\fingenius-learning-hub-main\src\app\games\page.tsx
+// File: D:\Fingenius\src\app\games\page.tsx
 import * as entry from '../../../../src/app/games/page.js'
 import type { ResolvingMetadata, ResolvingViewport } from 'next/dist/lib/metadata/types/metadata-interface.js'
 

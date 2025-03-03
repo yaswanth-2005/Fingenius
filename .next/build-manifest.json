@@ -1,35 +1,135 @@
 {
   "polyfillFiles": [
-    "static/chunks/polyfills.js"
+    "static/chunks/polyfills-42372ed130431b0a.js"
   ],
-  "devFiles": [
-    "static/chunks/react-refresh.js"
-  ],
+  "devFiles": [],
   "ampDevFiles": [],
   "lowPriorityFiles": [
-    "static/development/_buildManifest.js",
-    "static/development/_ssgManifest.js"
+    "static/IKRylHXhPBKD783BBxYCd/_buildManifest.js",
+    "static/IKRylHXhPBKD783BBxYCd/_ssgManifest.js"
   ],
   "rootMainFiles": [
-    "static/chunks/webpack.js",
-    "static/chunks/main-app.js"
+    "static/chunks/webpack-51d8795d649b7246.js",
+    "static/chunks/4bd1b696-2874c33353a126ab.js",
+    "static/chunks/6587-400bd5194c8bcf1a.js",
+    "static/chunks/main-app-cae4c1939ba1dee9.js"
   ],
   "rootMainFilesTree": {},
   "pages": {
+    "/ChatBot": [
+      "static/chunks/webpack-51d8795d649b7246.js",
+      "static/chunks/framework-4546f91fcedb361e.js",
+      "static/chunks/main-8e5299251ae1ff9e.js",
+      "static/chunks/1871-c8138a5a6e40198c.js",
+      "static/chunks/8165-bdf3f81c940f02af.js",
+      "static/chunks/pages/ChatBot-198c88f4b59b852a.js"
+    ],
+    "/CourseDetail": [
+      "static/chunks/webpack-51d8795d649b7246.js",
+      "static/chunks/framework-4546f91fcedb361e.js",
+      "static/chunks/main-8e5299251ae1ff9e.js",
+      "static/chunks/1871-c8138a5a6e40198c.js",
+      "static/chunks/8165-bdf3f81c940f02af.js",
+      "static/chunks/2749-3dae6b8a863b5e3e.js",
+      "static/chunks/3045-19badb43e408cb3e.js",
+      "static/chunks/pages/CourseDetail-5f5acbfe95f2fbd6.js"
+    ],
+    "/Courses": [
+      "static/chunks/webpack-51d8795d649b7246.js",
+      "static/chunks/framework-4546f91fcedb361e.js",
+      "static/chunks/main-8e5299251ae1ff9e.js",
+      "static/chunks/1871-c8138a5a6e40198c.js",
+      "static/chunks/8165-bdf3f81c940f02af.js",
+      "static/chunks/pages/Courses-09a5ff16ab8b7315.js"
+    ],
+    "/Games": [
+      "static/chunks/webpack-51d8795d649b7246.js",
+      "static/chunks/framework-4546f91fcedb361e.js",
+      "static/chunks/main-8e5299251ae1ff9e.js",
+      "static/chunks/1871-c8138a5a6e40198c.js",
+      "static/chunks/8165-bdf3f81c940f02af.js",
+      "static/chunks/491-7ef16d085b69554e.js",
+      "static/chunks/4670-214ab16c57ca6fed.js",
+      "static/chunks/pages/Games-f20d0ccbc16a86cb.js"
+    ],
+    "/Index": [
+      "static/chunks/webpack-51d8795d649b7246.js",
+      "static/chunks/framework-4546f91fcedb361e.js",
+      "static/chunks/main-8e5299251ae1ff9e.js",
+      "static/chunks/1871-c8138a5a6e40198c.js",
+      "static/chunks/8165-bdf3f81c940f02af.js",
+      "static/chunks/pages/Index-6b8ddf8dc59b12b1.js"
+    ],
+    "/Login": [
+      "static/chunks/webpack-51d8795d649b7246.js",
+      "static/chunks/framework-4546f91fcedb361e.js",
+      "static/chunks/main-8e5299251ae1ff9e.js",
+      "static/chunks/1871-c8138a5a6e40198c.js",
+      "static/chunks/8165-bdf3f81c940f02af.js",
+      "static/chunks/2392-c62166ac8cad27bb.js",
+      "static/chunks/8378-393825300ecc278a.js",
+      "static/chunks/pages/Login-cd52fabf3be9ad50.js"
+    ],
+    "/NotFound": [
+      "static/chunks/webpack-51d8795d649b7246.js",
+      "static/chunks/framework-4546f91fcedb361e.js",
+      "static/chunks/main-8e5299251ae1ff9e.js",
+      "static/chunks/1871-c8138a5a6e40198c.js",
+      "static/chunks/pages/NotFound-21e431dc3a2c0e3b.js"
+    ],
+    "/Podcast": [
+      "static/chunks/webpack-51d8795d649b7246.js",
+      "static/chunks/framework-4546f91fcedb361e.js",
+      "static/chunks/main-8e5299251ae1ff9e.js",
+      "static/chunks/1871-c8138a5a6e40198c.js",
+      "static/chunks/8165-bdf3f81c940f02af.js",
+      "static/chunks/491-7ef16d085b69554e.js",
+      "static/chunks/4670-214ab16c57ca6fed.js",
+      "static/chunks/pages/Podcast-000c34363143e98b.js"
+    ],
+    "/RegistrationDetails": [
+      "static/chunks/webpack-51d8795d649b7246.js",
+      "static/chunks/framework-4546f91fcedb361e.js",
+      "static/chunks/main-8e5299251ae1ff9e.js",
+      "static/chunks/1871-c8138a5a6e40198c.js",
+      "static/chunks/8165-bdf3f81c940f02af.js",
+      "static/chunks/2392-c62166ac8cad27bb.js",
+      "static/chunks/2749-3dae6b8a863b5e3e.js",
+      "static/chunks/908-f081b224d73e32b9.js",
+      "static/chunks/8378-393825300ecc278a.js",
+      "static/chunks/pages/RegistrationDetails-5e04b32a066a7259.js"
+    ],
+    "/SignUp": [
+      "static/chunks/webpack-51d8795d649b7246.js",
+      "static/chunks/framework-4546f91fcedb361e.js",
+      "static/chunks/main-8e5299251ae1ff9e.js",
+      "static/chunks/1871-c8138a5a6e40198c.js",
+      "static/chunks/8165-bdf3f81c940f02af.js",
+      "static/chunks/2392-c62166ac8cad27bb.js",
+      "static/chunks/8378-393825300ecc278a.js",
+      "static/chunks/pages/SignUp-136457a36b0c7f07.js"
+    ],
     "/_app": [
-      "static/chunks/webpack.js",
-      "static/chunks/main.js",
-      "static/chunks/pages/_app.js"
+      "static/chunks/webpack-51d8795d649b7246.js",
+      "static/chunks/framework-4546f91fcedb361e.js",
+      "static/chunks/main-8e5299251ae1ff9e.js",
+      "static/chunks/pages/_app-5cb523cd9cc3e331.js"
     ],
     "/_error": [
-      "static/chunks/webpack.js",
-      "static/chunks/main.js",
-      "static/chunks/pages/_error.js"
+      "static/chunks/webpack-51d8795d649b7246.js",
+      "static/chunks/framework-4546f91fcedb361e.js",
+      "static/chunks/main-8e5299251ae1ff9e.js",
+      "static/chunks/pages/_error-67df9cec1682e07c.js"
     ],
     "/billingportal": [
-      "static/chunks/webpack.js",
-      "static/chunks/main.js",
-      "static/chunks/pages/billingportal.js"
+      "static/chunks/webpack-51d8795d649b7246.js",
+      "static/chunks/framework-4546f91fcedb361e.js",
+      "static/chunks/main-8e5299251ae1ff9e.js",
+      "static/chunks/1871-c8138a5a6e40198c.js",
+      "static/chunks/8165-bdf3f81c940f02af.js",
+      "static/chunks/491-7ef16d085b69554e.js",
+      "static/chunks/8293-cebbf2e9e653211b.js",
+      "static/chunks/pages/billingportal-ba5e489ad006ff43.js"
     ]
   },
   "ampFirstPages": []

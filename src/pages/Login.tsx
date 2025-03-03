@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, Suspense } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
 import { z } from "zod";
@@ -34,10 +34,22 @@ type LoginValues = z.infer<typeof loginSchema>;
 
 const Login = () => {
   const router = useRouter();
-  const searchParams = useSearchParams();
   const [showPassword, setShowPassword] = useState(false);
 
-  // Get the redirect path from search params, or default to '/'
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <LoginForm
+        router={router}
+        showPassword={showPassword}
+        setShowPassword={setShowPassword}
+      />
+    </Suspense>
+  );
+};
+
+// Separate component for handling `useSearchParams()`
+const LoginForm = ({ router, showPassword, setShowPassword }) => {
+  const searchParams = useSearchParams();
   const from = searchParams?.get("from") || "/";
 
   const form = useForm<LoginValues>({
@@ -69,11 +81,10 @@ const Login = () => {
         path: "/",
       });
 
-      console.log(result.user);
       localStorage.setItem("user", JSON.stringify(result.user));
 
       toast.success("Login successful!");
-      router.push("/");
+      router.push(from);
     } catch (error) {
       console.error("Login error:", error);
       toast.error("Something went wrong. Please try again.");

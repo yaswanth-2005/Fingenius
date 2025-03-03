@@ -1,0 +1,17 @@
+{
+  "/api/profile/route": "/api/profile",
+  "/api/auth/route": "/api/auth",
+  "/api/register/route": "/api/register",
+  "/api/registration-details/route": "/api/registration-details",
+  "/_not-found/page": "/_not-found",
+  "/billing-portal/page": "/billing-portal",
+  "/chatbot/page": "/chatbot",
+  "/courses/page": "/courses",
+  "/course/[courseId]/page": "/course/[courseId]",
+  "/games/page": "/games",
+  "/login/page": "/login",
+  "/page": "/",
+  "/podcast/page": "/podcast",
+  "/registration-details/page": "/registration-details",
+  "/signup/page": "/signup"
+}

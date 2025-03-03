@@ -1,3 +1,5 @@
+"use client";
+
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import Navbar from "@/components/layout/Navbar";
@@ -286,6 +288,7 @@ const Games = () => {
 
   // Fetch score from cookie and store it in a variable
   const [cookieScore, setCookieScore] = useState(0);
+  const [userId, setUserId] = useState(null);
 
   useEffect(() => {
     const fetchScoreFromCookie = () => {
@@ -297,6 +300,13 @@ const Games = () => {
     };
 
     fetchScoreFromCookie();
+
+    // Set up an interval to continuously check for changes in the cookie
+    const interval = setInterval(() => {
+      fetchScoreFromCookie();
+    }, 1000); // Check every 1 second
+
+    return () => clearInterval(interval); // Cleanup interval on unmount
   }, []);
 
   useEffect(() => {
@@ -327,18 +337,23 @@ const Games = () => {
     fetchScoreFromDB();
   }, []);
 
-  const user = localStorage.getItem('user');
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      // Ensures code runs only in the browser
+      const user = localStorage.getItem("user");
 
-  if (user) {
-    try {
-      const parsedUser = JSON.parse(user);
-      const userId = parsedUser.id;
-    } catch (error) {
-      console.error("Error parsing user data:", error);
+      if (user) {
+        try {
+          const parsedUser = JSON.parse(user);
+          setUserId(parsedUser.id);
+        } catch (error) {
+          console.error("Error parsing user data:", error);
+        }
+      } else {
+        console.log("No user found in localStorage");
+      }
     }
-  } else {
-    console.log("No user found in localStorage");
-  }
+  }, []);
 
   useEffect(() => {
     let timer: NodeJS.Timeout;
@@ -387,8 +402,11 @@ const Games = () => {
   const endQuiz = async () => {
     if (!selectedQuiz) return;
 
-    // Calculate score
-    let totalScore = cookieScore;
+    // Reset the cookie before calculating the new score
+    Cookies.set("quizScore", "", { expires: 7 });
+
+    let totalScore = 0; // Start fresh
+
     selectedAnswers.forEach((answer, index) => {
       if (answer === selectedQuiz.questions[index].correctAnswer) {
         totalScore += 5;
@@ -426,12 +444,14 @@ const Games = () => {
       console.error("Error updating score:", error);
     }
 
-    // Store score in cookie
+    // Store only the new score in the cookie
     Cookies.set("quizScore", totalScore, { expires: 7 });
 
     toast({
       title: "Quiz completed!",
-      description: `Your score: ${totalScore} out of ${selectedQuiz.questions.length * 5}`,
+      description: `Your score: ${totalScore} out of ${
+        selectedQuiz.questions.length * 5
+      }`,
     });
   };
 
@@ -609,7 +629,8 @@ const Games = () => {
 
                         <Progress
                           value={
-                            ((currentQuestion + 1) / selectedQuiz.questions.length) *
+                            ((currentQuestion + 1) /
+                              selectedQuiz.questions.length) *
                             100
                           }
                           className="h-2 mb-6"
