@@ -8,8 +8,10 @@ import Footer from "@/components/layout/Footer";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Dialog, DialogOverlay, DialogContent } from "@/components/ui/dialog";
 import { ArrowLeft, ArrowRight, Check } from "lucide-react";
 import { toast } from "sonner";
+import { Close } from "@radix-ui/react-popover";
 
 // Define TypeScript Interfaces
 interface Module {
@@ -89,6 +91,7 @@ const CourseDetail: React.FC<CourseDetailProps> = ({ courseId }) => {
   const [currentModuleIndex, setCurrentModuleIndex] = useState(0);
   const [completedModules, setCompletedModules] = useState<string[]>([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
     if (!courseId) return;
@@ -129,6 +132,8 @@ const CourseDetail: React.FC<CourseDetailProps> = ({ courseId }) => {
   const handleNext = () => {
     if (currentModuleIndex < currentCourse.modules.length - 1) {
       setCurrentModuleIndex(currentModuleIndex + 1);
+    }else {
+      setShowModal(true);
     }
   };
 
@@ -143,6 +148,9 @@ const CourseDetail: React.FC<CourseDetailProps> = ({ courseId }) => {
         JSON.stringify(updatedModules)
       );
       toast.success("Module marked as completed!");
+      if (updatedModules.length === currentCourse.modules.length) {
+        setShowModal(true);
+      }
     }
   };
 
@@ -231,6 +239,24 @@ const CourseDetail: React.FC<CourseDetailProps> = ({ courseId }) => {
       </main>
 
       <Footer />
+
+      {showModal && (
+        <Dialog open={showModal} onOpenChange={setShowModal}>
+          <DialogOverlay className="fixed inset-0 bg-black bg-opacity-50" />
+          <DialogContent className="fixed inset-0 flex items-center justify-center p-4">
+            <div className="bg-white p-6 rounded-lg shadow-lg max-w-sm w-full">
+              <div className="flex justify-between items-center mb-4">
+                <h2 className="text-xl font-bold">Congratulations!</h2>
+                <Button variant="ghost" onClick={() => setShowModal(false)}>
+                  <Close className="w-5 h-5" />
+                </Button>
+              </div>
+              <p className="mb-4">You have completed all the modules in this course.</p>
+              <Button onClick={() => setShowModal(false)}>Close</Button>
+            </div>
+          </DialogContent>
+        </Dialog>
+      )}
     </div>
   );
 };

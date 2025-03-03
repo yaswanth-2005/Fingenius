@@ -15,6 +15,7 @@ model User {
   isAuthenticated        Boolean @default(false)
   isRegistrationComplete Boolean @default(false)
   profile                UserProfile?
+  scores                 Score[] // One user can have multiple scores
 }
 
 model UserProfile {
@@ -52,3 +53,13 @@ model CourseModule {
   videoUrl    String
   order       Int
 }
+
+model Score {
+  id        String  @id @default(uuid())
+  user      User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId    String
+  score     Int
+  selectedQuiz  String
+  createdAt DateTime @default(now())
+}
+
