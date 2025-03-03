@@ -24,6 +24,7 @@ import {
   X,
   Zap,
 } from "lucide-react";
+import Cookies from "js-cookie";
 
 interface Question {
   id: number;
@@ -283,21 +284,62 @@ const Games = () => {
   const [showResults, setShowResults] = useState(false);
   const [timeLeft, setTimeLeft] = useState(0);
 
+  // Fetch score from cookie and store it in a variable
+  const [cookieScore, setCookieScore] = useState(0);
+
+  useEffect(() => {
+    const fetchScoreFromCookie = () => {
+      const score = Cookies.get("quizScore");
+      if (score) {
+        setCookieScore(parseInt(score));
+        setScore(parseInt(score));
+      }
+    };
+
+    fetchScoreFromCookie();
+  }, []);
+
+  useEffect(() => {
+    const fetchScoreFromDB = async () => {
+      try {
+        const user = JSON.parse(localStorage.getItem("user"));
+        if (!user || !user.id) {
+          console.error("User not found in localStorage");
+          return;
+        }
+
+        const response = await fetch("/api/games", {
+          method: "GET",
+          headers: { "Content-Type": "application/json" },
+        });
+
+        if (!response.ok) {
+          throw new Error("Failed to fetch score");
+        }
+
+        const data = await response.json();
+        setScore(data.score);
+      } catch (error) {
+        console.error("Error fetching score:", error);
+      }
+    };
+
+    fetchScoreFromDB();
+  }, []);
+
   const user = localStorage.getItem('user');
 
   if (user) {
     try {
-      const parsedUser = JSON.parse(user); 
-      // console.log(parsedUser); 
-      const userId = parsedUser.id; 
-      // console.log(userId);
+      const parsedUser = JSON.parse(user);
+      const userId = parsedUser.id;
     } catch (error) {
       console.error("Error parsing user data:", error);
     }
   } else {
     console.log("No user found in localStorage");
   }
-  
+
   useEffect(() => {
     let timer: NodeJS.Timeout;
 
@@ -319,9 +361,9 @@ const Games = () => {
     setQuizInProgress(true);
     setCurrentQuestion(0);
     setSelectedAnswers(Array(quiz.questions.length).fill(-1));
-    setScore(0);
+    setScore(cookieScore);
     setShowResults(false);
-    setTimeLeft(quiz.questions.length * 30); 
+    setTimeLeft(quiz.questions.length * 30);
 
     toast({
       title: `Starting: ${quiz.title}`,
@@ -344,75 +386,54 @@ const Games = () => {
 
   const endQuiz = async () => {
     if (!selectedQuiz) return;
-  
+
     // Calculate score
-    let totalScore = 0;
+    let totalScore = cookieScore;
     selectedAnswers.forEach((answer, index) => {
       if (answer === selectedQuiz.questions[index].correctAnswer) {
         totalScore += 5;
       }
     });
-  
+
     setScore(totalScore);
     setShowResults(true);
     setQuizInProgress(false);
-  
+
     // Get user ID from localStorage
     const user = JSON.parse(localStorage.getItem("user"));
     if (!user || !user.id) {
       console.error("User not found in localStorage");
       return;
     }
-  
+
     try {
       const response = await fetch("/api/games", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           userId: user.id,
-          selectedQuiz:selectedQuiz.category,
+          selectedQuiz: selectedQuiz.category,
           score: totalScore,
         }),
       });
-  
+
       if (!response.ok) {
         throw new Error("Failed to update score in DB");
       }
-  
+
       console.log("Score updated successfully in DB!");
     } catch (error) {
       console.error("Error updating score:", error);
     }
-  
+
+    // Store score in cookie
+    Cookies.set("quizScore", totalScore, { expires: 7 });
+
     toast({
       title: "Quiz completed!",
       description: `Your score: ${totalScore} out of ${selectedQuiz.questions.length * 5}`,
     });
   };
-  
-
-  useEffect(() => {
-    const fetchScore = async () => {
-      try {
-        const response = await fetch("/api/games", {
-          method: "GET",
-          headers: { "Content-Type": "application/json" }
-        });
-
-        if (!response.ok) {
-          throw new Error("Failed to fetch score");
-        }
-
-        const data = await response.json(); // ✅ Parse the JSON response
-        setScore(data.score); // ✅ Store the fetched score in state
-        // console.log("Fetched Score:", data.score);
-      } catch (error) {
-        console.error("Error fetching score:", error);
-      }
-    };
-
-    fetchScore();
-  }, []);
 
   const resetQuiz = () => {
     setSelectedQuiz(null);
@@ -440,7 +461,7 @@ const Games = () => {
                 <div className="absolute top-20 right-10 flex items-center space-x-4 bg-gray-100 dark:bg-gray-800 px-3 py-2 rounded-lg shadow-md">
                   <Zap className="w-6 h-6 text-yellow-500" />
                   <span className="text-lg font-semibold text-gray-900 dark:text-white">
-                    {score}
+                    {cookieScore}
                   </span>
                 </div>
                 <p className="text-lg text-muted-foreground mb-6">
@@ -588,7 +609,7 @@ const Games = () => {
 
                         <Progress
                           value={
-                            (currentQuestion / selectedQuiz.questions.length) *
+                            ((currentQuestion + 1) / selectedQuiz.questions.length) *
                             100
                           }
                           className="h-2 mb-6"

@@ -3,8 +3,11 @@ import React from 'react';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Check } from 'lucide-react';
+import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 
 const PricingSection = () => {
+  const router = useRouter();
   const pricingPlans = [
     {
       name: 'Monthly',
@@ -53,6 +56,10 @@ const PricingSection = () => {
     },
   ];
 
+  const handleGetStarted = () => {
+    router.push("/billingportal");
+  };
+
   return (
     <section className="py-20">
       <div className="container px-4 mx-auto">
@@ -83,7 +90,7 @@ const PricingSection = () => {
               <CardContent className="flex-grow">
                 <div className="mb-6">
                   <span className="text-4xl font-bold">{plan.price}</span>
-                  {plan.name !== 'Custom' && <span className="text-muted-foreground">/month</span>}
+                  {plan.name !== 'Custom' &&  plan.name === 'Monthly'? <span className="text-muted-foreground">/month</span>:<span className="text-muted-foreground">/yearly</span>}
                 </div>
                 {plan.savings && (
                   <p className="text-sm bg-green-100 text-green-800 px-2 py-1 rounded-md inline-block mb-4">
@@ -103,6 +110,7 @@ const PricingSection = () => {
                 <Button 
                   className={`w-full ${plan.popular ? 'bg-primary' : ''}`}
                   variant={plan.popular ? 'default' : 'outline'}
+                  onClick={handleGetStarted}
                 >
                   {plan.buttonText}
                 </Button>

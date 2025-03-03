@@ -1489,6 +1489,9 @@ h6{
 .grid-cols-2{
   grid-template-columns: repeat(2, minmax(0, 1fr));
 }
+.grid-cols-3{
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
 .flex-row{
   flex-direction: row;
 }
@@ -1700,6 +1703,12 @@ h6{
 }
 .border-input{
   border-color: hsl(var(--input));
+}
+.border-muted{
+  border-color: hsl(var(--muted));
+}
+.border-muted-foreground{
+  border-color: hsl(var(--muted-foreground));
 }
 .border-primary{
   border-color: hsl(var(--primary));
@@ -2144,6 +2153,10 @@ h6{
 .text-gray-900{
   --tw-text-opacity: 1;
   color: rgb(17 24 39 / var(--tw-text-opacity, 1));
+}
+.text-green-500{
+  --tw-text-opacity: 1;
+  color: rgb(34 197 94 / var(--tw-text-opacity, 1));
 }
 .text-green-600{
   --tw-text-opacity: 1;
@@ -3447,6 +3460,10 @@ h6{
   min-height: calc(100svh - 1rem);
 }
 
+.peer[data-state="checked"] ~ .peer-data-\[state\=checked\]\:border-primary{
+  border-color: hsl(var(--primary));
+}
+
 .peer\/menu-button[data-active="true"] ~ .peer-data-\[active\=true\]\/menu-button\:text-sidebar-accent-foreground{
   color: hsl(var(--sidebar-accent-foreground));
 }
@@ -3568,6 +3585,10 @@ h6{
 
   .md\:col-span-1{
     grid-column: span 1 / span 1;
+  }
+
+  .md\:col-span-2{
+    grid-column: span 2 / span 2;
   }
 
   .md\:col-span-3{
@@ -3739,6 +3760,10 @@ h6{
 .\[\&\:has\(\[aria-selected\]\.day-range-end\)\]\:rounded-r-md:has([aria-selected].day-range-end){
   border-top-right-radius: calc(var(--radius) - 2px);
   border-bottom-right-radius: calc(var(--radius) - 2px);
+}
+
+.\[\&\:has\(\[data-state\=checked\]\)\]\:border-primary:has([data-state=checked]){
+  border-color: hsl(var(--primary));
 }
 
 .\[\&\:has\(\[role\=checkbox\]\)\]\:pr-0:has([role=checkbox]){

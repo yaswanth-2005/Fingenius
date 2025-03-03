@@ -17,7 +17,6 @@ const Index = () => {
   const [userName, setUserName] = useState("");
 
   useEffect(() => {
-    // Check if user is logged in when component mounts
     if (typeof window !== "undefined") {
       const userData = localStorage.getItem("user");
       if (userData) {
@@ -63,7 +62,6 @@ const Index = () => {
                 </Link>
               </Button>
             </div>
-
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               {/* Course previews - simplified versions of full course cards */}
               {[1, 2, 3].map((item) => (
