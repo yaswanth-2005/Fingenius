@@ -1157,6 +1157,9 @@ h6{
 .h-\[1px\]{
   height: 1px;
 }
+.h-\[350px\]{
+  height: 350px;
+}
 .h-\[600px\]{
   height: 600px;
 }
@@ -1184,15 +1187,6 @@ h6{
 }
 .h-svh{
   height: 100svh;
-}
-.h-\[500px\]{
-  height: 500px;
-}
-.h-\[300px\]{
-  height: 300px;
-}
-.h-\[350px\]{
-  height: 350px;
 }
 .max-h-0{
   max-height: 0px;
@@ -1629,9 +1623,6 @@ h6{
 }
 .overflow-x-hidden{
   overflow-x: hidden;
-}
-.overflow-y-scroll{
-  overflow-y: scroll;
 }
 .whitespace-nowrap{
   white-space: nowrap;

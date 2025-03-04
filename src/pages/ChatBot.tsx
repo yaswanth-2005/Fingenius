@@ -55,44 +55,31 @@ const ChatBot = () => {
   const generateBotResponse = async (userMessage: string) => {
     setIsTyping(true);
 
-    // Simulate API call delay
-    await new Promise((resolve) => setTimeout(resolve, 1000));
+    try {
+      const response = await fetch("/api/generate-text", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ message: userMessage }),
+      });
 
-    // Basic response patterns - in a real app this would call an AI API
-    let botResponse = "";
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(`Error fetching response: ${errorData.error || response.statusText}`);
+      }
 
-    if (userMessage.toLowerCase().includes("stock")) {
-      botResponse =
-        "Stock investments can be a great way to build wealth. Consider diversifying your portfolio and investing for the long term. Would you like some specific stock investment advice?";
-    } else if (
-      userMessage.toLowerCase().includes("budget") ||
-      userMessage.toLowerCase().includes("saving")
-    ) {
-      botResponse =
-        "Creating a budget is essential for financial health. The 50/30/20 rule is a good starting point - 50% for needs, 30% for wants, and 20% for savings and debt repayment. Would you like more budgeting tips?";
-    } else if (
-      userMessage.toLowerCase().includes("retire") ||
-      userMessage.toLowerCase().includes("retirement")
-    ) {
-      botResponse =
-        "Retirement planning should start early. Consider maximizing your 401(k) contributions, especially if your employer offers matching. IRAs and other tax-advantaged accounts can also be valuable tools.";
-    } else if (userMessage.toLowerCase().includes("debt")) {
-      botResponse =
-        "When tackling debt, consider the avalanche method (paying highest interest first) or the snowball method (paying smallest balances first). Would you like me to elaborate on these strategies?";
-    } else {
-      botResponse =
-        "That's an interesting question about finance. Would you like me to provide more specific information or resources on this topic?";
+      const data = await response.json();
+      const botResponse = data?.response || "I'm not sure about that.";
+
+      setMessages((prev) => [...prev, { id: Date.now().toString(), content: botResponse, sender: "bot", timestamp: new Date() }]);
+    } catch (error) {
+      console.error("❌ Error generating bot response:", error);
+      setMessages((prev) => [
+        ...prev,
+        { id: Date.now().toString(), content: error.message || "Sorry, an error occurred.", sender: "bot", timestamp: new Date() },
+      ]);
+    } finally {
+      setIsTyping(false);
     }
-
-    const newBotMessage: Message = {
-      id: Date.now().toString(),
-      content: botResponse,
-      sender: "bot",
-      timestamp: new Date(),
-    };
-
-    setMessages((prev) => [...prev, newBotMessage]);
-    setIsTyping(false);
   };
 
   const handleSendMessage = () => {
